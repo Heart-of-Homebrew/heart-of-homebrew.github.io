@@ -1,19 +1,28 @@
 <!doctype html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <link rel="icon" type="image/svg+xml" href="/public/icon.svg" />
+<html lang="en" xmlns="http://www.w3.org/1999/html">
+<head>
+    <meta charset="UTF-8"/>
+    <link rel="icon" type="image/svg+xml" href="/public/icon.svg"/>
     <link rel="stylesheet" href="/src/style.css">
-    <script type="module" src="/src/main.js"></script>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <script src="/src/main.js"></script>
     <title>Sheet Editor?</title>
-  </head>
-  <body>
-    <div id="app">
+</head>
+<body>
+<div id="app">
     <div>
-    <a href="" target="_blank">
-      <img id="icon" src="/public/icon.svg" class="logo" alt="Sheed Editor Logo">
-    </a>
+        <a href="" target="_blank">
+            <img id="icon" src="/public/icon.svg" class="logo" alt="Sheed Editor Logo">
+        </a>
     </div>
-  </body>
+  <button id="loadButton" onclick="viewPdf()">Load</button>
+  <input type="file" id="pdfFile" accept="application/pdf">
+
+  <div id="pdfViewerContainer">
+    <button id="closeButton" onclick="closeIframe()">Close</button>
+    <iframe id="pdfIframe"></iframe>
+  </div>
+
+</div>
+</body>
 </html>
