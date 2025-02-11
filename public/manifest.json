@@ -1,12 +1,12 @@
 {
-  "name": "Hello, Owlbear Rodeo!",
+  "name": "ViewSheets",
   "version": "1.0.0",
   "manifest_version": 1,
   "action": {
-    "title": "Hello, World!",
+    "title": "ViewSheets, Character Sheet Viewer",
     "icon": "/icon.svg",
     "popover": "/",
-    "height": 600,
-    "width": 400
+    "height": 1200,
+    "width": 800
   }
 }

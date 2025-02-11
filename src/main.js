@@ -22,10 +22,5 @@ function viewPdf() {
 
 function closeIframe() {
     const viewerContainer = document.getElementById("pdfViewerContainer");
-    const fileInput = document.getElementById("pdfFile");
-    const loadButton = document.getElementById("loadButton");
-    const file = fileInput.files[0];
     viewerContainer.style.display = "none";
-    fileInput.style.visibility = "inline-block";
-
 }
