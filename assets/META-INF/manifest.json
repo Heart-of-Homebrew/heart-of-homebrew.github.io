@@ -1,0 +1,12 @@
+{
+  "name": "ViewSheets",
+  "version": "0.0.1",
+  "manifest_version": 1,
+  "action": {
+    "title": "ViewSheets, Character Sheet Viewer",
+    "icon": "/public/icon.svg",
+    "popover": "/",
+    "height": 800,
+    "width": 800
+  }
+}

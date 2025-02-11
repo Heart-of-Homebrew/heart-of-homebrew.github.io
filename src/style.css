@@ -68,3 +68,12 @@ h1 {
 .logo.vanilla:hover {
   filter: drop-shadow(0 0 2em #f7df1eaa);
 }
+
+footer {
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  text-align: center;
+  padding: 5px 0;
+  background-color: lightgray;
+}
