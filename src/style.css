@@ -4,8 +4,8 @@
   left: 50%;
   padding-top: 45px;
   transform: translate(-50%, -50%);
-  width: 80%;
-  height: 80%;
+  width: 95%;
+  height: 95%;
   display: none;
   z-index: 9999;
   background: rgba(0, 0, 0, 0.5);
