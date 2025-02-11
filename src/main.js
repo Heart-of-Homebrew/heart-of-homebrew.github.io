@@ -1,3 +1,13 @@
+fetch('./assets/META-INF/manifest.json')
+    .then(response => response.json())
+    .then(data => {
+    const footerElement = document.getElementById("footer");
+    footerElement.innerHTML = `${data.version} (alpha)<br>&copy; Heart of Homebrew 2025`;
+})
+    .catch(error => {
+    console.error('Error loading JSON:', error);
+});
+
 function viewPdf() {
     const fileInput = document.getElementById("pdfFile");
     const file = fileInput.files[0];
