@@ -1,0 +1,24 @@
+.orienta-root {
+    padding: 32px 40px;
+    color: var(--muted);
+}
+
+.orienta-root h2 {
+    font-family: "Cormorant Garamond";
+    font-size: 38px;
+    color: var(--gold-1);
+    margin-top: 0;
+}
+
+.orienta-placeholder {
+    margin-top: 24px;
+    padding: 24px;
+    border-radius: 12px;
+    background: linear-gradient(
+        135deg,
+        rgba(23,130,194,0.10),
+        rgba(30,127,80,0.10)
+    );
+    border: 1px solid rgba(255,255,255,0.05);
+    font-size: 16px;
+}

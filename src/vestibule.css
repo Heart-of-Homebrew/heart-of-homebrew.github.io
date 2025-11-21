@@ -1,0 +1,109 @@
+.archive-layout {
+    display: grid;
+    max-width: var(--max-width);
+    margin: 0 auto;
+    padding: 28px;
+    grid-template-columns: 280px 1fr;
+    height: calc(100vh - 72px);
+}
+
+.archive-sidebar {
+    overflow-y: auto;
+    padding: 18px 12px;
+    border-right: 1px solid rgba(255,255,255,0.05);
+}
+
+.archive-sidebar::-webkit-scrollbar {
+    width: 10px;
+}
+.archive-sidebar::-webkit-scrollbar-thumb {
+    background: linear-gradient(135deg, var(--emerald-2), var(--sapphire-2));
+    border-radius: 8px;
+}
+.archive-sidebar::-webkit-scrollbar-track {
+    background: rgba(255,255,255,0.03);
+}
+
+.divider {
+    height: 1px;
+    background: rgba(255,255,255,0.05);
+    margin: 16px 0;
+}
+
+.nav-section {
+    padding: 6px 8px;
+}
+
+.nav-section.active-section {
+    background: linear-gradient(
+        135deg,
+        rgba(23,130,194,0.10),
+        rgba(30,127,80,0.10)
+    );
+}
+
+.nav-category {
+    color: var(--gold-1);
+    font-weight: 700;
+    margin-bottom: 6px;
+    cursor: pointer;
+}
+
+.nav-item {
+    padding: 4px 4px;
+    margin: 2px 0;
+    cursor: pointer;
+    border-radius: 6px;
+    color: var(--muted);
+}
+
+.nav-item.nav-selected {
+    background: linear-gradient(
+        90deg,
+        rgba(23,130,194,0.16),
+        rgba(30,127,80,0.16)
+    );
+    color: var(--gold-2) !important;
+    padding-left: 8px;
+}
+
+.nav-children {
+    padding-left: 12px;
+}
+
+.archive-sidebar {
+  scrollbar-gutter: stable;
+}
+
+.archive-content {
+    padding: 30px 40px;
+    overflow-y: auto;
+}
+
+.archive-title {
+    font-family: "Cormorant Garamond";
+    font-size: 42px;
+    color: var(--gold-1);
+    margin: 0;
+}
+
+.archive-flavor {
+    margin-top: 12px;
+    font-size: 16px;
+    color: var(--muted);
+    border-left: 3px solid var(--emerald-2);
+    padding-left: 14px;
+}
+
+.archive-feature-placeholder {
+    margin-top: 40px;
+    height: 200px;
+    border-radius: 12px;
+    background: rgba(255,255,255,0.02);
+    border: 1px solid rgba(255,255,255,0.05);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--muted);
+    font-size: 16px;
+}

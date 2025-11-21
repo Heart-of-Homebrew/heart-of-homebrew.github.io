@@ -1,31 +1,53 @@
 <!doctype html>
-<html lang="en" xmlns="http://www.w3.org/1999/html">
+<html lang="en">
 <head>
-    <meta charset="UTF-8"/>
-    <link rel="icon" type="image/svg+xml" href="/icon.svg"/>
-    <link rel="stylesheet" href="/src/style.css">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-    <script src="/src/main.js"></script>
-    <title>Sheet Editor?</title>
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width,initial-scale=1"/>
+    <title>Athenaeum Ceriad</title>
+
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;700&family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="src/aa-main.css">
 </head>
 <body>
-<div id="app">
-    <div>
-        <a href="" target="_blank">
-            <img id="icon" src="/icon.svg" class="logo" alt="Sheed Editor Logo">
+
+<header class="topbar">
+    <div class="topbar-inner">
+        <a class="logo" href="#">
+            <img src="assets/icon-inkscape.svg" class="sigil" alt="Site Logo">
+            <span>Athenaeum Ceriad</span>
         </a>
+
+        <nav class="nav hidden-init" id="topNav">
+            <a href="#atrium" class="swap" data-main="Atrium" data-alt="Home">Atrium</a>
+            <a href="#archive" class="swap" data-main="Archive" data-alt="Wiki">Archive</a>
+            <a href="#atlasiary" class="swap" data-main="Atlasiary" data-alt="Map">Atlasiary</a>
+            <a href="#planetarium" class="swap" data-main="Planetarium" data-alt="Star Map">Planetarium</a>
+            <a href="#gallery" class="swap" data-main="Gallery" data-alt="Artwork">Gallery</a>
+            <a href="#orienta" class="swap" data-main="Orienta" data-alt="About">Orienta</a>
+        </nav>
+
+        <div class="top-actions">
+            <div class="search">
+                <label for="siteSearch"></label><input id="siteSearch" placeholder="Search...">
+            </div>
+            <button class="btn ghost" id="randomBtn">Surprise Me!</button>
+        </div>
     </div>
-  <button id="loadButton" onclick="viewPdf()">Load</button>
-  <input type="file" id="pdfFile" accept="application/pdf">
+</header>
 
-  <div id="pdfViewerContainer">
-    <button id="closeButton" onclick="closeIframe()">Close</button>
-    <iframe id="pdfIframe"></iframe>
-  </div>
+<main id="frame"></main>
 
-</div>
-
-<footer id="footer">
+<footer>
+    <div class="footer-inner">
+        <div>© <strong>Athenaeum Ceriad</strong> 2025. All rights reserved.</div>
+        <div style="display:flex;gap:12px">
+            <a href="#" style="color:var(--muted)">Contact</a>
+            <a href="#" style="color:var(--muted)">Donate</a>
+            <a href="#" style="color:var(--muted)">Legal</a>
+        </div>
+    </div>
 </footer>
+
+<script defer src="src/aa-main.js"></script>
 </body>
 </html>
