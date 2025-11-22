@@ -2,7 +2,6 @@
   display:grid;
   grid-template-columns:1fr 400px;
   gap:28px;
-  align-items:center;
   padding:54px 20px;
 }
 
@@ -14,25 +13,6 @@
   box-shadow: 0 10px 40px rgba(0,0,0,0.6);
 }
 
-.world-title {
-  font-family:"Cormorant Garamond";
-  font-size:44px;
-  margin:0;
-  color:var(--gold-1);
-  text-shadow:0 6px 24px rgba(58,40,12,0.12);
-}
-
-.world-tag {
-  color:var(--muted);
-  margin-top:6px;
-  margin-bottom:18px}
-  .hero-cta{display:flex;gap:12px;margin-top:18px}
-  .hero-meta{margin-top:20px;
-  color:var(--muted);
-  font-size:14px;
-  line-height:1.6;
-}
-
 .hero-side {
   background:linear-gradient(135deg, rgba(25,40,35,0.45), rgba(12,22,36,0.35));
   border-radius:12px;
@@ -42,13 +22,6 @@
 
 .section {
   margin-top:30px;
-}
-
-.section h3 {
-  margin:0 0 12px 0;
-  font-size:18px;
-  color:var(--gold-2);
-  font-weight:700;
 }
 
 .carousel-wrap {

@@ -9,15 +9,20 @@ const ROUTES = {
         css: "src/vestibule.css",
         js: "src/vestibule.js"
     },
-    atlasiary: {
-        html: "pages/atlasiary/foyer.html",
-        css: "src/atlasiary.css",
-        js: "src/atlasiary.js"
+    cartohall: {
+        html: "pages/cartohall/foyer.html",
+        css: "src/cartohall.css",
+        js: "src/cartohall.js"
     },
     planetarium: {
         html: "pages/planetarium/entrance.html",
         css: "src/planetarium.css",
         js: "src/planetarium.js"
+    },
+    chronospire: {
+        html: "pages/chronospire/escalier.html",
+        css: "src/chronospire.css",
+        js: "src/chronospire.js"
     },
     gallery: {
         html: "pages/gallery/lobby.html",
@@ -142,11 +147,27 @@ function initHoverSwap() {
 
 
 
+let suppressHashHandler = false;
+
 window.addEventListener("hashchange", () => {
+    if (suppressHashHandler) {
+        suppressHashHandler = false;
+        return;
+    }
+
+    let hash = location.hash || "#atrium";
+    let route = hash.substring(1);
+
+    if (!Object.prototype.hasOwnProperty.call(ROUTES, route)) {
+        suppressHashHandler = true;
+        location.hash = "#atrium";
+        route = "atrium";
+    }
+
     hideUnhiddenInits();
-    const route = (location.hash || "#atrium").substring(1);
     loadPage(route);
 });
+
 
 window.addEventListener("DOMContentLoaded", () => {
     initHoverSwap();

@@ -223,6 +223,44 @@ button, .btn, .nav a, header, .hero-cta a, .no-select {
   -ms-user-select: none;
 }
 
+h1 {
+  font-family:"Cormorant Garamond";
+  font-size:44px;
+  margin:0;
+  color:var(--gold-1);
+  text-shadow:0 6px 24px rgba(58,40,12,0.12);
+}
+
+.hero {
+  align-items:center;
+}
+
+.hero-card {
+  background: linear-gradient(180deg, rgba(255,255,255,0.02), transparent);
+  border-radius:16px;
+  padding:28px;
+  border:1px solid rgba(255,215,120,0.03);
+  box-shadow: 0 10px 40px rgba(0,0,0,0.6);
+}
+
+.hero-tagline {
+  color:var(--muted);
+  margin-top:6px;
+  margin-bottom:18px}
+  .hero-cta{display:flex;gap:12px;margin-top:18px}
+  .hero-meta{margin-top:20px;
+  color:var(--muted);
+  font-size:14px;
+  line-height:1.6;
+}
+
+h3 {
+  margin:0 0 12px 0;
+  font-size:18px;
+  color:var(--gold-2);
+  font-weight:700;
+}
+
 p, h1, h2, h3, h4, h5, h6, article, main {
   user-select: text;
   -webkit-user-select: text;
