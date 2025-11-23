@@ -1,14 +1,17 @@
+main {
+  padding: 10px;
+}
+
 .hero {
   display:grid;
   grid-template-columns:1fr 400px;
   gap:28px;
-  padding:54px 20px;
+  padding:20px 20px;
 }
 
 .hero-card {
   background: linear-gradient(180deg, rgba(255,255,255,0.02), transparent);
   border-radius:16px;
-  padding:28px;
   border:1px solid rgba(255,215,120,0.03);
   box-shadow: 0 10px 40px rgba(0,0,0,0.6);
 }

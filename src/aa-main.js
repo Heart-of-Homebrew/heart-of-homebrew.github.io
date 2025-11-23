@@ -82,10 +82,12 @@ async function loadPage(routeName) {
     const route = ROUTES[routeName];
     if (!route) return;
 
-    clearPageAssets();
-
     const frame = document.getElementById("frame");
     const html = await fetch(route.html).then(r => r.text());
+
+    clearPageAssets();
+    hideUnhiddenInits();
+
     frame.innerHTML = html;
 
     await loadCSS(route.css);
@@ -145,11 +147,10 @@ function initHoverSwap() {
     });
 }
 
-
-
 let suppressHashHandler = false;
 
 window.addEventListener("hashchange", () => {
+
     if (suppressHashHandler) {
         suppressHashHandler = false;
         return;
@@ -158,20 +159,48 @@ window.addEventListener("hashchange", () => {
     let hash = location.hash || "#atrium";
     let route = hash.substring(1);
 
-    if (!Object.prototype.hasOwnProperty.call(ROUTES, route)) {
+    if (hash.startsWith("#archive")) {
+        if (!(hash === "#archive")) {
+
+            if (window.loadArchiveContent) {
+                const route = "pages/" + location.hash.substring(1);
+                const srcRoute = "src/" + location.hash.substring(1);
+                window.loadArchiveContent(route);
+            }
+            return;
+        }
+    }
+
+    if (!(Object.prototype.hasOwnProperty.call(ROUTES, route) | hash.startsWith("#archive"))) {
         suppressHashHandler = true;
         location.hash = "#atrium";
         route = "atrium";
     }
 
-    hideUnhiddenInits();
     loadPage(route);
 });
 
-
-window.addEventListener("DOMContentLoaded", () => {
+window.addEventListener("DOMContentLoaded", async () => {
     initHoverSwap();
 
-    const route = (location.hash || "#atrium").substring(1);
-    loadPage(route);
+    const hash  = location.hash || "#atrium";
+    const slash = hash.indexOf("/");
+
+    if (slash === -1) {
+        await loadPage(hash.substring(1));
+    } else {
+        const topRoute = hash.substring(1, slash);
+
+        await loadPage(topRoute);
+        //Todo: make the welcome page not visible when immediately loading content
+
+        if (window.loadArchiveContent) {
+            const route = "pages/" + location.hash.substring(1);
+            window.loadArchiveContent(route);
+        }
+
+        if (window.syncArchiveSidebarFromHash) {
+            window.syncArchiveSidebarFromHash(location.hash);
+        }
+    }
 });

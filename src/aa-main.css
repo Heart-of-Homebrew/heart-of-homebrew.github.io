@@ -217,12 +217,6 @@ html {
   color: var(--muted);
 }
 
-button, .btn, .nav a, header, .hero-cta a, .no-select {
-  user-select: none;
-  -webkit-user-select: none;
-  -ms-user-select: none;
-}
-
 h1 {
   font-family:"Cormorant Garamond";
   font-size:44px;
@@ -246,9 +240,16 @@ h1 {
 .hero-tagline {
   color:var(--muted);
   margin-top:6px;
-  margin-bottom:18px}
-  .hero-cta{display:flex;gap:12px;margin-top:18px}
-  .hero-meta{margin-top:20px;
+  margin-bottom:12px
+}
+
+.hero-cta{
+  display:flex;gap:12px;
+  margin-top:18px
+}
+
+.hero-meta{
+  margin-top:10px;
   color:var(--muted);
   font-size:14px;
   line-height:1.6;
@@ -259,6 +260,12 @@ h3 {
   font-size:18px;
   color:var(--gold-2);
   font-weight:700;
+}
+
+button, .btn, .nav a, header, .hero-cta a, .no-select {
+  user-select: none;
+  -webkit-user-select: none;
+  -ms-user-select: none;
 }
 
 p, h1, h2, h3, h4, h5, h6, article, main {

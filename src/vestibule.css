@@ -1,5 +1,5 @@
 main {
-    padding: 0px
+    padding: 0px;
 }
 
 .archive-layout {
@@ -57,6 +57,21 @@ main {
     cursor: pointer;
     border-radius: 6px;
     color: var(--muted);
+    font-weight: 200;
+}
+
+.nav-item.nav-category.nav-main {
+    color: var(--gold-1);
+    font-weight: 800;
+}
+
+.nav-item.nav-category.nav-sub {
+    font-weight: 400;
+}
+
+.nav-item.nav-category {
+    color: var(--muted);
+    font-weight: 600;
 }
 
 .nav-item.nav-selected {
@@ -71,6 +86,10 @@ main {
 
 .nav-children {
     padding-left: 12px;
+}
+
+.active-section.nav-buffer {
+    background: rgba(255,255,255,0.0);
 }
 
 .archive-sidebar {
