@@ -6,8 +6,12 @@ main {
     display: grid;
     max-width: var(--max-width);
     margin: 0 auto;
-    grid-template-columns: 200px 1fr;
+    grid-template-columns: 220px 1fr;
     height: calc(100vh - 72px);
+}
+
+.archive-content {
+    color: white;
 }
 
 .archive-sidebar {
@@ -127,4 +131,135 @@ main {
     justify-content: center;
     color: var(--muted);
     font-size: 16px;
+}
+
+/* ========================================================================
+   TOOLTIP SYSTEM — host element gets zero visual formatting
+   ======================================================================== */
+
+.define {
+    position: relative;
+    text-decoration: underline;
+    text-decoration-thickness: 1px;
+    text-decoration-style: dotted;
+    text-underline-offset: 2px;
+}
+
+/* Tooltip panel */
+.define-tooltip {
+    position: absolute;
+    left: 50%;
+
+    /* MOVED FARTHER FROM ELEMENT */
+    bottom: 160%;
+    transform: translateX(-50%) translateY(4px);
+
+    display: block;
+    min-width: 220px;
+    max-width: min(380px, 80vw);
+    white-space: normal !important;
+
+    visibility: hidden;
+    opacity: 0;
+    pointer-events: none;
+    transition:
+        opacity 0.18s ease-out,
+        transform 0.18s ease-out,
+        visibility 0s linear 0.18s;
+
+    padding: 8px 12px;
+    border-radius: var(--radius);
+    z-index: 999999;
+
+    background: var(--glass);
+    backdrop-filter: blur(8px);
+
+    border: 1px solid;
+    border-image: linear-gradient(135deg, var(--emerald-2), var(--sapphire-2)) 1;
+
+    box-shadow:
+        0 8px 24px rgba(0,0,0,0.7),
+        0 0 0 1px rgba(0,0,0,0.5);
+
+    color: var(--gold-2);
+    font-family: "Cormorant Garamond", serif;
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 1.5;
+}
+
+/* Definition text */
+.define-tooltip-definition {
+    margin: 0;
+}
+
+/* “Also called – …” line */
+.define-tooltip-also {
+    margin-top: 6px;
+    font-size: 13px;
+    font-weight: 500;
+    color: var(--gold-2);
+    opacity: 0.95;
+}
+
+/* Tooltip arrow (default: above element, arrow pointing downward) */
+.define-tooltip::before {
+    content: "";
+    position: absolute;
+    left: 50%;
+    bottom: -7px;
+    transform: translateX(-50%) rotate(45deg);
+
+    width: 12px;
+    height: 12px;
+
+    background: linear-gradient(180deg, var(--emerald-2), var(--sapphire-2));
+    backdrop-filter: blur(8px);
+
+    border: 1px solid transparent;
+    border-image: linear-gradient(90deg, var(--gold-1), var(--gold-2)) 1;
+
+    z-index: 999999;
+}
+
+/* Flipped tooltip BELOW element */
+.define-tooltip.flip-tooltip {
+    bottom: auto;
+
+    /* MOVED FARTHER BELOW THE ELEMENT */
+    top: 160%;
+    transform: translateX(-50%) translateY(4px);
+}
+
+/* Flipped tooltip arrow */
+.define-tooltip.flip-tooltip::before {
+    content: "";
+    position: absolute;
+    left: 50%;
+    top: -7px;
+    transform: translateX(-50%) rotate(45deg);
+
+    width: 12px;
+    height: 12px;
+
+    background: linear-gradient(180deg, var(--emerald-2), var(--sapphire-2));
+    backdrop-filter: blur(8px);
+
+    border: 1px solid transparent;
+    border-image: linear-gradient(90deg, var(--gold-1), var(--gold-2)) 1;
+
+    z-index: 999999;
+}
+
+/* Reveal tooltip on hover/focus */
+.define:hover .define-tooltip,
+.define:focus-visible .define-tooltip {
+    visibility: visible;
+    opacity: 1;
+    transform: translateX(-50%) translateY(0);
+}
+
+.define-tooltip,
+.define-tooltip * {
+    text-indent: 0 !important;
 }

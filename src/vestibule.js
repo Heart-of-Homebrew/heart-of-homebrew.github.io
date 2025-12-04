@@ -1,13 +1,143 @@
 (function () {
 
-    //Todo: make childrens children collapse as well, fully and recursively if necessary
-
     const layout = document.querySelector(".archive-layout");
     if (!layout) return;
 
     const navItems = layout.querySelectorAll(".nav-item");
     const navSections = layout.querySelectorAll(".nav-section");
     const contentPanel = layout.querySelector(".archive-content");
+
+    /* =======================================================================
+       GLOSSARY & TOOLTIP SYSTEM
+    ======================================================================= */
+
+    const DEFINITIONS_MAP = new Map(); // Map<string, { names: string[], definition: string }>
+
+    function normalizeDefinitionTerm(text) {
+        return (text || "").trim().toLowerCase().replace(/\s+/g, " ");
+    }
+
+    async function loadGlossary() {
+        try {
+            const response = await fetch("src/aa-glossary.json");
+            if (!response.ok) {
+                console.error("Glossary load failed:", response.status, response.statusText);
+                return;
+            }
+
+            const data = await response.json();
+            DEFINITIONS_MAP.clear();
+
+            Object.entries(data).forEach(([key, value]) => {
+                if (typeof value !== "string") return;
+
+                const names = key
+                    .split(",")
+                    .map(n => n.trim())
+                    .filter(Boolean);
+
+                if (!names.length) return;
+
+                const entry = { names, definition: value };
+
+                names.forEach(name => {
+                    DEFINITIONS_MAP.set(normalizeDefinitionTerm(name), entry);
+                });
+            });
+
+            initDefinitionsTooltips(layout);
+
+            console.log("Glossary loaded with", DEFINITIONS_MAP.size, "keys");
+        } catch (err) {
+            console.error("Error loading glossary JSON:", err);
+        }
+    }
+
+    function adjustTooltipPosition(el) {
+        const tooltip = el.querySelector(".define-tooltip");
+        if (!tooltip) return;
+
+        // Reset to default "above" positioning
+        tooltip.classList.remove("flip-tooltip");
+
+        const container =
+            el.closest(".archive-content") ||
+            layout.querySelector(".archive-content") ||
+            document.documentElement;
+
+        const containerRect = container.getBoundingClientRect();
+        const tipRect = tooltip.getBoundingClientRect();
+
+        // If tooltip's top would go above the container's visible top, flip it
+        const padding = 8;
+        if (tipRect.top < containerRect.top + padding) {
+            tooltip.classList.add("flip-tooltip");
+        }
+    }
+
+    function initDefinitionsTooltips(root) {
+        const scope = root || layout || document;
+        if (!scope) return;
+
+        const defineEls = scope.querySelectorAll(".define");
+        if (!defineEls.length) return;
+
+        defineEls.forEach(el => {
+            const explicit = el.getAttribute("data-term");
+            const alt = el.getAttribute("data-alt");
+
+            const lookupBase = explicit || alt || el.textContent || "";
+            const lookupKey = normalizeDefinitionTerm(lookupBase);
+
+            const entry = DEFINITIONS_MAP.get(lookupKey);
+            if (!entry) return;
+
+            const existing = el.querySelector(".define-tooltip");
+            if (existing) existing.remove();
+
+            const tooltip = document.createElement("div");
+            tooltip.className = "define-tooltip";
+
+            const defDiv = document.createElement("div");
+            defDiv.className = "define-tooltip-definition";
+            defDiv.textContent = entry.definition;
+            tooltip.appendChild(defDiv);
+
+            const baseForExclusion = normalizeDefinitionTerm(
+                alt || explicit || el.textContent || ""
+            );
+
+            const synonyms = entry.names.filter(name => {
+                return normalizeDefinitionTerm(name) !== baseForExclusion;
+            });
+
+            if (synonyms.length > 0) {
+                const alsoDiv = document.createElement("div");
+                alsoDiv.className = "define-tooltip-also";
+                alsoDiv.textContent = "Also called – " + synonyms.join(", ");
+                tooltip.appendChild(alsoDiv);
+            }
+
+            el.appendChild(tooltip);
+
+            el.setAttribute("data-term", lookupBase.trim());
+            if (!el.hasAttribute("tabindex")) {
+                el.setAttribute("tabindex", "0");
+            }
+
+            // Recalculate on interaction, so scrolling doesn't break us
+            const recalc = () => adjustTooltipPosition(el);
+            el.addEventListener("mouseenter", recalc);
+            el.addEventListener("focus", recalc);
+
+            // Initial pass
+            adjustTooltipPosition(el);
+        });
+    }
+
+    /* =======================================================================
+       ARCHIVE UI LOGIC
+    ======================================================================= */
 
     function highlightSection(sectionName) {
         navSections.forEach(section => {
@@ -18,29 +148,68 @@
         });
     }
 
+    function scrollArchiveSidebarToSelected(containerSelector = ".archive-sidebar") {
+        const container = document.querySelector(containerSelector);
+        if (!container) return;
+
+        const selected = container.querySelector(".nav-item.nav-selected");
+        if (!selected) return;
+
+        const fullRange = container.scrollHeight - container.clientHeight;
+        if (fullRange <= 0) return;
+
+        let offset = 0;
+        let node = selected;
+        while (node && node !== container) {
+            offset += node.offsetTop;
+            node = node.offsetParent;
+        }
+
+        const target = offset - (container.clientHeight / 2 - selected.clientHeight / 2);
+        const clamped = Math.max(0, Math.min(fullRange, target));
+
+        container.scrollTo({ top: clamped, behavior: "smooth" });
+    }
+
     function selectNavItem(item) {
         navItems.forEach(i => i.classList.remove("nav-selected"));
         item.classList.add("nav-selected");
+        scrollArchiveSidebarToSelected();
     }
 
     async function loadArchiveContent(target) {
         if (!target || !contentPanel) return;
 
-        try {
-            const response = await fetch(target);
+        document.querySelectorAll('link[data-archive-css]').forEach(el => el.remove());
 
-            if (!response.ok) {
+        try {
+            const htmlResponse = await fetch(target + ".html");
+
+            if (!htmlResponse.ok) {
                 contentPanel.innerHTML = `
                     <div class="archive-error">
                         <p>Unable to load this entry.</p>
-                        <p><small>(${response.status} ${response.statusText})</small></p>
+                        <p><small>(${htmlResponse.status} ${htmlResponse.statusText})</small></p>
                     </div>
                 `;
                 return;
             }
 
-            const html = await response.text();
+            const html = await htmlResponse.text();
             contentPanel.innerHTML = html;
+
+            initDefinitionsTooltips(contentPanel);
+
+            const cssUrl = target + ".css";
+            const cssOk = await fetch(cssUrl).then(r => r.ok).catch(() => false);
+            if (cssOk) {
+                const tag = document.createElement("link");
+                tag.rel = "stylesheet";
+                tag.href = cssUrl;
+                tag.dataset.archiveCss = cssUrl;
+                document.head.appendChild(tag);
+            }
+
         } catch (err) {
             console.error("Error loading archive content:", err);
             contentPanel.innerHTML = `
@@ -51,94 +220,78 @@
         }
     }
 
+    console.log("instantiating window.loadArchiveContent");
     window.loadArchiveContent = loadArchiveContent;
 
-        function normalizeHref(raw) {
-            if (!raw) return null;
-            let href = raw.trim();
+    function normalizeHref(raw) {
+        if (!raw) return null;
+        let href = raw.trim();
 
-            if (href.startsWith("/")) {
-                href = href.slice(1);
-            }
+        if (href.startsWith("/")) href = href.slice(1);
+        if (href.startsWith("pages/archive/")) href = href.slice("pages/archive/".length);
+        if (href.startsWith("archive/")) href = href.slice("archive/".length);
+        if (href.endsWith("/")) href = href.slice(0, -1);
 
-            if (href.startsWith("pages/archive/")) {
-                href = href.slice("pages/archive/".length);
-            }
+        return href;
+    }
 
-            if (href.startsWith("archive/")) {
-                href = href.slice("archive/".length);
-            }
+    function syncArchiveSidebarFromHash(hash) {
+        if (!layout || !hash) return;
+        if (hash.startsWith("#")) hash = hash.slice(1);
+        if (!hash.startsWith("archive")) return;
 
-            if (href.endsWith("/")) {
-                href = href.slice(0, -1);
-            }
+        let path = hash.slice("archive".length);
+        if (path.startsWith("/")) path = path.slice(1);
 
-            return href;
+        const targetKey = normalizeHref(path);
+        if (!targetKey) return;
+
+        const allItems = Array.from(navItems);
+        const targetItem = allItems.find(item => {
+            const key = normalizeHref(item.dataset.href);
+            return key === targetKey;
+        });
+
+        if (!targetItem) {
+            console.warn("Archive sidebar: no nav-item matches", targetKey);
+            return;
         }
 
-        function syncArchiveSidebarFromHash(hash) {
-            if (!layout || !hash) return;
-            if (hash.startsWith("#")) hash = hash.slice(1);
+        navItems.forEach(i => i.classList.remove("nav-selected"));
+        targetItem.classList.add("nav-selected");
 
-            if (!hash.startsWith("archive")) return;
+        layout.querySelectorAll(".nav-children").forEach(group => {
+            group.style.display = "none";
+        });
 
-            let path = hash.slice("archive".length);
-            if (path.startsWith("/")) path = path.slice(1);
-
-            const targetKey = normalizeHref(path);
-            if (!targetKey) return;
-
-            const allItems = Array.from(navItems);
-            const targetItem = allItems.find(item => {
-                const key = normalizeHref(item.dataset.href);
-                return key === targetKey;
-            });
-
-            if (!targetItem) {
-                console.warn("Archive sidebar: no nav-item matches", targetKey);
-                return;
+        const directChildren = targetItem.nextElementSibling;
+        if (directChildren && directChildren.classList.contains("nav-children")) {
+            directChildren.style.display = "block";
+            const owningSection = targetItem.closest(".nav-section");
+            if (owningSection && owningSection.dataset.section) {
+                highlightSection(owningSection.dataset.section);
             }
+        }
 
-            navItems.forEach(i => i.classList.remove("nav-selected"));
-
-            targetItem.classList.add("nav-selected");
-
-            layout.querySelectorAll(".nav-children").forEach(group => {
-                group.style.display = "none";
-            });
-
-            const directChildren = targetItem.nextElementSibling;
-            if (
-                directChildren &&
-                directChildren.classList.contains("nav-children")
-            ) {
-                directChildren.style.display = "block";
-
-                const owningSection = targetItem.closest(".nav-section");
-                if (owningSection && owningSection.dataset.section) {
-                    highlightSection(owningSection.dataset.section);
-                }
-            }
-
-            let node = targetItem;
-            while (node && node !== layout) {
-                if (node.classList && node.classList.contains("nav-children")) {
-                    node.style.display = "block";
-
-                    const category = node.previousElementSibling;
-                    if (category && category.classList.contains("nav-category")) {
-                        const section = category.closest(".nav-section");
-                        if (section && section.dataset.section) {
-                            highlightSection(section.dataset.section);
-                        }
+        let node = targetItem;
+        while (node && node !== layout) {
+            if (node.classList && node.classList.contains("nav-children")) {
+                node.style.display = "block";
+                const category = node.previousElementSibling;
+                if (category && category.classList.contains("nav-category")) {
+                    const section = category.closest(".nav-section");
+                    if (section && section.dataset.section) {
+                        highlightSection(section.dataset.section);
                     }
                 }
-
-                node = node.parentElement;
             }
+            node = node.parentElement;
         }
 
-        window.syncArchiveSidebarFromHash = syncArchiveSidebarFromHash;
+        scrollArchiveSidebarToSelected();
+    }
+
+    window.syncArchiveSidebarFromHash = syncArchiveSidebarFromHash;
 
     function collapseNonSelectedGroups(parent, myChildren) {
         const siblingGroups = Array.from(parent.children).filter(
@@ -148,8 +301,7 @@
         );
 
         siblingGroups.forEach(group => {
-            group.style.display =
-                group === myChildren ? "block" : "none";
+            group.style.display = group === myChildren ? "block" : "none";
         });
     }
 
@@ -168,7 +320,6 @@
             let shouldSelectAndLoad = true;
 
             if (isCategory) {
-                // Try to find this category's own dropdown children
                 const sibling = item.nextElementSibling;
                 const myChildren =
                     sibling && sibling.classList.contains("nav-children")
@@ -180,37 +331,21 @@
                     const isOpen = myChildren.style.display === "block";
 
                     if (parent.classList.contains("nav-section")) {
-                        // ============================
-                        // TOP-LEVEL CATEGORY
-                        // ============================
-
-                        console.log("is top level");
-
                         highlightSection(parent.dataset.section);
 
                         if (isOpen && wasSelected) {
-                            // Click on the currently selected, open parent:
-                            // -> collapse everything and go "home"
-
-                            // 1) Clear selected nav items
                             navItems.forEach(i => i.classList.remove("nav-selected"));
 
-                            // 2) Clear section highlight
-                            highlightSection(); // undefined -> no section matches
+                            highlightSection();
 
-                            // 3) Collapse all dropdowns
                             layout.querySelectorAll(".nav-children").forEach(group => {
                                 group.style.display = "none";
                             });
 
-                            // 4) Reload Archive root via hash
-                            window.location.hash = "#refresh";
                             window.location.hash = "#archive";
 
-                            // Don't re-select or load this category
                             shouldSelectAndLoad = false;
                         } else {
-                            // Open this group and close other top-level groups
                             layout
                                 .querySelectorAll(".nav-section > .nav-children")
                                 .forEach(group => {
@@ -219,20 +354,14 @@
                                 });
                         }
                     } else if (parent.classList.contains("nav-children")) {
-                        // ============================
-                        // NESTED CATEGORY (e.g., Continents)
-                        // ============================
 
                         if (isOpen && wasSelected) {
-                            // Only collapse its own children
                             myChildren.style.display = "none";
                         } else {
-                           collapseNonSelectedGroups(parent, myChildren);
+                            collapseNonSelectedGroups(parent, myChildren);
                         }
                     }
                 }
-            } else {
-                collapseNonSelectedGroups(item.parentElement, false);
             }
 
             if (shouldSelectAndLoad) {
@@ -240,10 +369,36 @@
 
                 const target = item.dataset.href;
                 if (target) {
-                    console.log(target)
                     location.hash = "#archive/" + target;
                 }
             }
         });
     });
+
+    initDefinitionsTooltips(layout);
+    loadGlossary();
+
+    window.CeriadDefinitions = {
+        refresh(root) {
+            initDefinitionsTooltips(root || layout || document);
+        },
+        add(term, definition) {
+            const names = (term || "")
+                .split(",")
+                .map(n => n.trim())
+                .filter(Boolean);
+            if (!names.length || !definition) return;
+
+            const entry = { names, definition };
+
+            names.forEach(name => {
+                const norm = normalizeDefinitionTerm(name);
+                DEFINITIONS_MAP.set(norm, entry);
+            });
+
+            initDefinitionsTooltips(layout);
+        },
+        map: DEFINITIONS_MAP
+    };
+
 })();

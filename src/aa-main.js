@@ -152,6 +152,7 @@ let suppressHashHandler = false;
 window.addEventListener("hashchange", () => {
 
     if (suppressHashHandler) {
+        console.log("suppressed D:");
         suppressHashHandler = false;
         return;
     }
@@ -160,7 +161,7 @@ window.addEventListener("hashchange", () => {
     let route = hash.substring(1);
 
     if (hash.startsWith("#archive")) {
-        if (!(hash === "#archive")) {
+        if (!(hash === "#archive")) { //Todo: fix this logic, archive doesnt open the second time it is tried
 
             if (window.loadArchiveContent) {
                 const route = "pages/" + location.hash.substring(1);
