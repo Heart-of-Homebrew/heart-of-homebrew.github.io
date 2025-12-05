@@ -161,7 +161,7 @@ window.addEventListener("hashchange", () => {
     let route = hash.substring(1);
 
     if (hash.startsWith("#archive")) {
-        if (!(hash === "#archive")) { //Todo: fix this logic, archive doesnt open the second time it is tried
+        if (!(hash === "#archive")) {
 
             if (window.loadArchiveContent) {
                 const route = "pages/" + location.hash.substring(1);
@@ -180,7 +180,7 @@ window.addEventListener("hashchange", () => {
 
     loadPage(route);
 });
-
+//Todo: get proper archive loading to happen when using back and forth arrows
 window.addEventListener("DOMContentLoaded", async () => {
     initHoverSwap();
 
@@ -193,7 +193,6 @@ window.addEventListener("DOMContentLoaded", async () => {
         const topRoute = hash.substring(1, slash);
 
         await loadPage(topRoute);
-        //Todo: make the welcome page not visible when immediately loading content
 
         if (window.loadArchiveContent) {
             const route = "pages/" + location.hash.substring(1);

@@ -1,4 +1,5 @@
 (function () {
+//Todo: when archive content is loaded reset scroll to top
 
     const layout = document.querySelector(".archive-layout");
     if (!layout) return;
@@ -114,7 +115,7 @@
             if (synonyms.length > 0) {
                 const alsoDiv = document.createElement("div");
                 alsoDiv.className = "define-tooltip-also";
-                alsoDiv.textContent = "Also called – " + synonyms.join(", ");
+                alsoDiv.textContent = "Also called → " + synonyms.join("; ");
                 tooltip.appendChild(alsoDiv);
             }
 

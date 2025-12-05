@@ -1,8 +1,10 @@
 {
-  "Greater Soul, Greater Being": "The rare union of a greater spirit with a powerful enough body, capable of channeling deific power",
+  "Deific Power": "A unique power over laws of physics, nature, and metaphysics. There are currently only 12 known.",
+  "Body": "A physical vessel meant to be united with a spirit to form a complete \"soul\"",
   "Deity, Deific Soul, Deific Being": "A greater soul that has actually been bound to a deific power",
-  "Soul, Being": "A completed union of both body and spirit",
-  "Lesser Soul, Lesser Being": "The union of any body with a lesser spirit",
+  "Greater Soul, Greater Being": "The rare union of a greater spirit with a powerful enough body, capable of channeling deific power",
   "Greater Spirit": "A special type of spirit with a far greater capacity for magical power than a normal, lesser spirit",
-  "Deific Power": "A unique power over laws of physics, nature, and metaphysics. There are currently only 12 known."
+  "Lesser Soul, Lesser Being": "The union of any body with a lesser spirit",
+  "Soul, Being": "A completed union of both body and spirit",
+  "Spirit": "The essence behind consciousness, which connects bodies from the physical plane with magical energy from other planes"
 }

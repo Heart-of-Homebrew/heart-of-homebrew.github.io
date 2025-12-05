@@ -133,10 +133,6 @@ main {
     font-size: 16px;
 }
 
-/* ========================================================================
-   TOOLTIP SYSTEM — host element gets zero visual formatting
-   ======================================================================== */
-
 .define {
     position: relative;
     text-decoration: underline;
@@ -145,12 +141,10 @@ main {
     text-underline-offset: 2px;
 }
 
-/* Tooltip panel */
 .define-tooltip {
     position: absolute;
     left: 50%;
 
-    /* MOVED FARTHER FROM ELEMENT */
     bottom: 160%;
     transform: translateX(-50%) translateY(4px);
 
@@ -188,12 +182,10 @@ main {
     line-height: 1.5;
 }
 
-/* Definition text */
 .define-tooltip-definition {
     margin: 0;
 }
 
-/* “Also called – …” line */
 .define-tooltip-also {
     margin-top: 6px;
     font-size: 13px;
@@ -202,7 +194,6 @@ main {
     opacity: 0.95;
 }
 
-/* Tooltip arrow (default: above element, arrow pointing downward) */
 .define-tooltip::before {
     content: "";
     position: absolute;
@@ -222,16 +213,12 @@ main {
     z-index: 999999;
 }
 
-/* Flipped tooltip BELOW element */
 .define-tooltip.flip-tooltip {
     bottom: auto;
-
-    /* MOVED FARTHER BELOW THE ELEMENT */
     top: 160%;
     transform: translateX(-50%) translateY(4px);
 }
 
-/* Flipped tooltip arrow */
 .define-tooltip.flip-tooltip::before {
     content: "";
     position: absolute;
@@ -251,7 +238,6 @@ main {
     z-index: 999999;
 }
 
-/* Reveal tooltip on hover/focus */
 .define:hover .define-tooltip,
 .define:focus-visible .define-tooltip {
     visibility: visible;
