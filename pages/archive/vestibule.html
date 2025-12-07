@@ -1,4 +1,10 @@
-<!--Todo: make hidden-inits work for archive content-->
+<script>
+  (function () {
+    console.log("post script running...");
+    if (window.top !== window.self) return;
+    window.location.replace("../../index.html#archive");
+  })();
+</script>
 <main class="wrap archive-layout hidden-init">
   <aside class="archive-sidebar hidden-init no-select">
 

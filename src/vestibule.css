@@ -249,3 +249,122 @@ main {
 .define-tooltip * {
     text-indent: 0 !important;
 }
+
+.archive-section {
+    margin-top: 32px;
+    padding: 22px 24px 20px;
+    border-radius: 12px;
+    background: linear-gradient(
+        135deg,
+        rgba(23,130,194,0.10),
+        rgba(30,127,80,0.10)
+    );
+    border: 1px solid rgba(255,255,255,0.05);
+}
+
+.archive-section + .archive-section {
+    margin-top: 24px;
+}
+
+.archive-section h2 {
+    margin: 0 0 10px 0;
+    font-family: "Cormorant Garamond";
+    font-size: 28px;
+    color: var(--gold-1);
+}
+
+.archive-section p {
+    margin: 6px 0 10px;
+    font-size: 15px;
+    color: var(--muted);
+    line-height: 1.7;
+}
+
+.archive-section ul {
+    margin: 10px 0 4px;
+    padding-left: 1.25rem;
+    font-size: 15px;
+    color: var(--muted);
+}
+
+.archive-section li {
+    margin: 4px 0;
+}
+
+.archive-section a, .archive-section a:visited {
+    color: var(--gold-1);
+    font-weight: 900;
+    cursor: pointer;
+}
+
+.archive-section a:hover, .archive-section a:visited:hover {
+    color: var(--gold-2);
+    font-weight: 900;
+}
+
+.spoiler {
+    margin: 8px 0;
+}
+
+.spoiler details {
+    margin: 6px 0;
+    padding: 10px 12px;
+    border-radius: var(--radius);
+    background: linear-gradient(
+        135deg,
+        rgba(23,130,194,0.12),
+        rgba(30,127,80,0.10)
+    );
+    border: 1px solid rgba(255,255,255,0.06);
+    color: var(--muted);
+    max-width: 100%;
+    font-family: inherit;
+}
+
+.spoiler summary {
+    cursor: pointer;
+    font-family: "Cormorant Garamond";
+    font-size: 18px;
+    color: var(--gold-2);
+    font-weight: 600;
+    list-style: none;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.spoiler summary::-webkit-details-marker {
+    display: none;
+}
+
+.spoiler summary::before {
+    content: "▸";
+    font-size: 0.9em;
+    color: var(--gold-2);
+    transition: transform 0.18s ease;
+}
+
+.spoiler details[open] summary::before {
+    content: "▾";
+}
+
+.spoiler summary:hover {
+    color: var(--gold-1);
+}
+
+p.in {
+    text-indent: 12px;
+}
+
+.spoiler p {
+    text-indent: 0px;
+    margin: 8px 0 4px;
+    font-size: 15px;
+    color: var(--muted);
+    line-height: 1.7;
+}
+
+b {
+    color: white;
+    font-weight: 900;
+}

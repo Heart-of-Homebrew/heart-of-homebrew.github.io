@@ -1,3 +1,10 @@
+<script>
+    (function () {
+      console.log("post script running...");
+      if (window.top !== window.self) return;
+      window.location.replace("../../index.html#gallery");
+    })();
+</script>
 <main class="wrap hidden-init">
     <section class="hero">
         <div class="hero-card">

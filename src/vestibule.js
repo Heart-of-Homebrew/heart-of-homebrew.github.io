@@ -1,6 +1,6 @@
 (function () {
 //Todo: when archive content is loaded reset scroll to top
-
+//Todo: add expand-all and collapse-all buttons to spoiler segments
     const layout = document.querySelector(".archive-layout");
     if (!layout) return;
 
@@ -8,11 +8,7 @@
     const navSections = layout.querySelectorAll(".nav-section");
     const contentPanel = layout.querySelector(".archive-content");
 
-    /* =======================================================================
-       GLOSSARY & TOOLTIP SYSTEM
-    ======================================================================= */
-
-    const DEFINITIONS_MAP = new Map(); // Map<string, { names: string[], definition: string }>
+    const DEFINITIONS_MAP = new Map();
 
     function normalizeDefinitionTerm(text) {
         return (text || "").trim().toLowerCase().replace(/\s+/g, " ");
@@ -58,7 +54,6 @@
         const tooltip = el.querySelector(".define-tooltip");
         if (!tooltip) return;
 
-        // Reset to default "above" positioning
         tooltip.classList.remove("flip-tooltip");
 
         const container =
@@ -69,7 +64,6 @@
         const containerRect = container.getBoundingClientRect();
         const tipRect = tooltip.getBoundingClientRect();
 
-        // If tooltip's top would go above the container's visible top, flip it
         const padding = 8;
         if (tipRect.top < containerRect.top + padding) {
             tooltip.classList.add("flip-tooltip");
@@ -126,19 +120,13 @@
                 el.setAttribute("tabindex", "0");
             }
 
-            // Recalculate on interaction, so scrolling doesn't break us
             const recalc = () => adjustTooltipPosition(el);
             el.addEventListener("mouseenter", recalc);
             el.addEventListener("focus", recalc);
 
-            // Initial pass
             adjustTooltipPosition(el);
         });
     }
-
-    /* =======================================================================
-       ARCHIVE UI LOGIC
-    ======================================================================= */
 
     function highlightSection(sectionName) {
         navSections.forEach(section => {
@@ -180,9 +168,6 @@
 
     async function loadArchiveContent(target) {
         if (!target || !contentPanel) return;
-
-        document.querySelectorAll('link[data-archive-css]').forEach(el => el.remove());
-
         try {
             const htmlResponse = await fetch(target + ".html");
 
@@ -195,22 +180,10 @@
                 `;
                 return;
             }
-
             const html = await htmlResponse.text();
             contentPanel.innerHTML = html;
 
             initDefinitionsTooltips(contentPanel);
-
-            const cssUrl = target + ".css";
-            const cssOk = await fetch(cssUrl).then(r => r.ok).catch(() => false);
-            if (cssOk) {
-                const tag = document.createElement("link");
-                tag.rel = "stylesheet";
-                tag.href = cssUrl;
-                tag.dataset.archiveCss = cssUrl;
-                document.head.appendChild(tag);
-            }
-
         } catch (err) {
             console.error("Error loading archive content:", err);
             contentPanel.innerHTML = `
@@ -219,9 +192,9 @@
                 </div>
             `;
         }
+        window.unhideHiddenInits();
     }
 
-    console.log("instantiating window.loadArchiveContent");
     window.loadArchiveContent = loadArchiveContent;
 
     function normalizeHref(raw) {
@@ -401,5 +374,4 @@
         },
         map: DEFINITIONS_MAP
     };
-
 })();

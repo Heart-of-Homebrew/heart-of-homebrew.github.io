@@ -101,7 +101,7 @@ html {
 }
 
 .logo .sigil {
-  background-image: url("/assets/icon-inkscape.svg");
+  background-image: url("/assets/icon.svg");
   background-size: cover;
   background-repeat: no-repeat;
   background-position: center;
