@@ -1,3 +1,5 @@
+<!--Todo: Full passthrough of all articles cleaning up defines and links-->
+<!--Todo: Rearrange tree to separate lands from landforms, add landmarks to political (or add cultural?)-->
 <script>
   (function () {
     console.log("post script running...");
@@ -7,7 +9,6 @@
 </script>
 <main class="wrap archive-layout hidden-init">
   <aside class="archive-sidebar hidden-init no-select">
-
 
     <!--                ___          _   _     _                        -->
     <!--               |   \   ___  (_) | |_  (_)  ___   ___            -->
@@ -79,70 +80,72 @@
     <!--               \___| \___| \___/ \__, | |_|   \__,_| | .__/ |_||_|  \_, |            -->
     <!--                                 |___/               |_|            |__/             -->
     <div class="nav-section" data-section="geography">
-    <div class="nav-main nav-category nav-item" data-href="geography/overview">Geography</div>
+      <div class="nav-main nav-category nav-item" data-href="geography/overview">Geography</div>
       <div class="nav-children">
 
         <!-- *********************************************************************** -->
-        <!-- *                               GEO POLITICAL                             * -->
+        <!-- *                               POLITICAL                             * -->
         <!-- *********************************************************************** -->
-        <div class="nav-category nav-item" data-href="geography/geo-political/overview">Geo Political</div>
+        <div class="nav-category nav-item" data-href="geography/political/overview">Political</div>
         <div class="nav-children">
 
           <!-- Capitals -->
-          <div class="nav-sub nav-category nav-item" data-href="geography/geo-political/capitals/overview">Capitals</div>
+          <div class="nav-sub nav-category nav-item" data-href="geography/political/capitals/overview">Capitals</div>
           <div class="nav-children">
-            <div class="nav-item" data-href="geography/geo-political/capitals/placeholder">Placeholder</div>
+            <div class="nav-item" data-href="geography/political/capitals/placeholder">Placeholder</div>
           </div>
 
           <!--     Cities/Towns     -->
-          <div class="nav-sub nav-category nav-item" data-href="geography/geo-political/cities-towns/overview">Cities & Towns</div>
+          <div class="nav-sub nav-category nav-item" data-href="geography/political/cities-towns/overview">Cities & Towns</div>
           <div class="nav-children">
-            <div class="nav-item" data-href="geography/geo-political/cities-towns/ajorund">Ajorund</div>
-            <div class="nav-item" data-href="geography/geo-political/cities-towns/amalur">Amalur</div>
-            <div class="nav-item" data-href="geography/geo-political/cities-towns/clairevont">Clairevont</div>
-            <div class="nav-item" data-href="geography/geo-political/cities-towns/isparla">Isparla</div>
-            <div class="nav-item" data-href="geography/geo-political/cities-towns/kibo-no-machi">Kibo No Machi</div>
+            <div class="nav-item" data-href="geography/political/cities-towns/ajorund">Ajorund</div>
+            <div class="nav-item" data-href="geography/political/cities-towns/amalur">Amalur</div>
+            <div class="nav-item" data-href="geography/political/cities-towns/clairevont">Clairevont</div>
+            <div class="nav-item" data-href="geography/political/cities-towns/hvergi">Hvergi</div>
+            <div class="nav-item" data-href="geography/political/cities-towns/isparla">Isparla</div>
+            <div class="nav-item" data-href="geography/political/cities-towns/kibo-no-machi">Kibo No Machi</div>
+            <div class="nav-item" data-href="geography/political/cities-towns/tyndurheim">Tyndùrheim</div>
           </div>
 
           <!--     Nations     -->
-          <div class="nav-sub nav-category nav-item" data-href="geography/geo-political/nations/overview">Nations</div>
+          <div class="nav-sub nav-category nav-item" data-href="geography/political/nations/overview">Nations</div>
           <div class="nav-children">
             <!-- A-E -->
-            <div class="nav-item" data-href="geography/geo-political/nations/aidenvale">Aidenvale</div>
-            <div class="nav-item" data-href="geography/geo-political/nations/bainsland">Bainsland</div>
-            <div class="nav-item" data-href="geography/geo-political/nations/bracth">Bracth</div>
-            <div class="nav-item" data-href="geography/geo-political/nations/chiverend">Chiverend</div>
-            <div class="nav-item" data-href="geography/geo-political/nations/drangleic">Drangleic</div>
-            <div class="nav-item" data-href="geography/geo-political/nations/effervesca">Effervesca</div>
+            <div class="nav-item" data-href="geography/political/nations/aidenvale">Aidenvale</div>
+            <div class="nav-item" data-href="geography/political/nations/bainsland">Bainsland</div>
+            <div class="nav-item" data-href="geography/political/nations/bracth">Bracth</div>
+            <div class="nav-item" data-href="geography/political/nations/chiverend">Chiverend</div>
+            <div class="nav-item" data-href="geography/political/nations/drangleic">Drangleic</div>
+            <div class="nav-item" data-href="geography/political/nations/effervesca">Effervesca</div>
             <!-- F-J -->
-            <div class="nav-item" data-href="geography/geo-political/nations/gantru">Gantru</div>
-            <div class="nav-item" data-href="geography/geo-political/nations/hilnath">Hilnath</div>
-            <div class="nav-item" data-href="geography/geo-political/nations/iorlin">Iorlin</div>
+            <div class="nav-item" data-href="geography/political/nations/gantru">Gantru</div>
+            <div class="nav-item" data-href="geography/political/nations/hilnath">Hilnath</div>
+            <div class="nav-item" data-href="geography/political/nations/iorlin">Iorlin</div>
             <!-- K-O -->
-            <div class="nav-item" data-href="geography/geo-political/nations/lamdis-empire">Lamdis Empire</div>
-            <div class="nav-item" data-href="geography/geo-political/nations/lancekarth">Lancekarth</div>
-            <div class="nav-item" data-href="geography/geo-political/nations/nalthia">Nalthia</div>
-            <div class="nav-item" data-href="geography/geo-political/nations/new-gaelsand">New Gaelsand</div>
-            <div class="nav-item" data-href="geography/geo-political/nations/old-rebublic">Old Republic</div>
-            <div class="nav-item" data-href="geography/geo-political/nations/olrua">Olru'a</div>
+            <div class="nav-item" data-href="geography/political/nations/lamdis-empire">Lamdis Empire</div>
+            <div class="nav-item" data-href="geography/political/nations/lancekarth">Lancekarth</div>
+            <div class="nav-item" data-href="geography/political/nations/nalthia">Nalthia</div>
+            <div class="nav-item" data-href="geography/political/nations/new-gaelsand">New Gaelsand</div>
+            <div class="nav-item" data-href="geography/political/nations/old-rebublic">Old Republic</div>
+            <div class="nav-item" data-href="geography/political/nations/olrua">Olru'a</div>
             <!-- P-T -->
-            <div class="nav-item" data-href="geography/geo-political/nations/raxic">Raxic</div>
+            <div class="nav-item" data-href="geography/political/nations/raxic">Raxic</div>
             <!-- U-Z -->
-            <div class="nav-item" data-href="geography/geo-political/nations/verma">Verma</div>
-            <div class="nav-item" data-href="geography/geo-political/nations/victorterra">Victorterra</div>
-            <div class="nav-item" data-href="geography/geo-political/nations/wildlands">Wildlands?</div>
+            <div class="nav-item" data-href="geography/political/nations/verma">Verma</div>
+            <div class="nav-item" data-href="geography/political/nations/victorterra">Victorterra</div>
+            <div class="nav-item" data-href="geography/political/nations/wildlands">Wildlands?</div>
           </div>
 
           <!-- Religious -->
-          <div class="nav-sub nav-category nav-item" data-href="geography/geo-political/religious/overview">Religious</div>
+          <div class="nav-sub nav-category nav-item" data-href="geography/political/religious/overview">Religious</div>
           <div class="nav-children">
-            <div class="nav-item" data-href="geography/geo-political/religious/placeholder/overview">Placeholder</div>
+            <div class="nav-item" data-href="geography/political/religious/placeholder/overview">Placeholder</div>
           </div>
 
           <!--     Strongholds    -->
-          <div class="nav-sub nav-category nav-item" data-href="geography/geo-political/strongholds/overview">Strongholds</div>
+          <div class="nav-sub nav-category nav-item" data-href="geography/political/strongholds/overview">Strongholds</div>
           <div class="nav-children">
-            <div class="nav-item" data-href="geography/geo-political/strongholds/placeholder">Placeholder</div>
+            <div class="nav-item" data-href="geography/political/strongholds/placeholder">Placeholder</div>
           </div>
 
         </div>
@@ -155,38 +158,38 @@
           <!--     Canyons     -->
           <div class="nav-sub nav-category nav-item" data-href="geography/lands-landforms/canyons/overview">Canyons</div>
           <div class="nav-children">
-            <div class="nav-item" data-href="geography/lands-landforms/canyons/redspine-chasm">Redspine Chasm</div><!-- Todo: placeholder -->
+            <div class="nav-item" data-href="geography/lands-landforms/canyons/redspine-chasm">Redspine Chasm</div>
           </div>
 
           <!--     Caves     -->
           <div class="nav-sub nav-category nav-item" data-href="geography/lands-landforms/caves/overview">Caves</div>
           <div class="nav-children">
-            <div class="nav-item" data-href="geography/lands-landforms/caves/moonveil-grotto">Moonveil Grotto</div><!-- Todo: placeholder -->
+            <div class="nav-item" data-href="geography/lands-landforms/caves/moonveil-grotto">Moonveil Grotto</div>
           </div>
 
           <!--  Continents   -->
           <div class="nav-sub nav-category nav-item" data-href="geography/lands-landforms/continents/overview">Continents</div>
           <div class="nav-children">
-            <div class="nav-item" data-href="geography/continents/lamdis">Lamdis</div>
-            <div class="nav-item" data-href="geography/continents/tannul">Tannul</div>
-            <div class="nav-item" data-href="geography/continents/khimra">Khimra</div>
-            <div class="nav-item" data-href="geography/continents/abaresh">Abaresh</div>
-            <div class="nav-item" data-href="geography/continents/elkrendal">Elkrendal</div>
-            <div class="nav-item" data-href="geography/continents/chromythra">Chromythra</div>
+            <div class="nav-item" data-href="geography/lands-landforms/continents/lamdis">Lamdis</div>
+            <div class="nav-item" data-href="geography/lands-landforms/continents/tannul">Tannul</div>
+            <div class="nav-item" data-href="geography/lands-landforms/continents/khimra">Khimra</div>
+            <div class="nav-item" data-href="geography/lands-landforms/continents/abaresh">Abaresh</div>
+            <div class="nav-item" data-href="geography/lands-landforms/continents/elkrendal">Elkrendal</div>
+            <div class="nav-item" data-href="geography/lands-landforms/continents/chromythra">Chromythra</div>
           </div>
 
           <!-- Craters/Calderas -->
           <div class="nav-sub nav-category nav-item" data-href="geography/lands-landforms/craters-calderas/overview">
-            Craters/Calderas
+            Craters/Calderas 
           </div>
           <div class="nav-children">
-            <div class="nav-item" data-href="geography/lands-landforms/craters-calderas/ashen-bowl">The Ashen Bowl</div><!-- Todo: placeholder -->
+            <div class="nav-item" data-href="geography/lands-landforms/craters-calderas/ashen-bowl">The Ashen Bowl</div>
           </div>
 
           <!--     Deserts     -->
           <div class="nav-sub nav-category nav-item" data-href="geography/lands-landforms/deserts/overview">Deserts</div>
           <div class="nav-children">
-            <div class="nav-item" data-href="geography/lands-landforms/deserts/gorava">Gorava</div><!-- Todo: placeholder -->
+            <div class="nav-item" data-href="geography/lands-landforms/deserts/gorava">Gorava</div>
           </div>
 
           <!--     Forests     -->
@@ -204,13 +207,13 @@
           <!--     Highlands     -->
           <div class="nav-sub nav-category nav-item" data-href="geography/lands-landforms/highlands/overview">Highlands</div>
           <div class="nav-children">
-            <div class="nav-item" data-href="geography/lands-landforms/highlands/dawnfell-hills">Dawnfell Hills</div><!-- Todo: placeholder -->
+            <div class="nav-item" data-href="geography/lands-landforms/highlands/dawnfell-hills">Dawnfell Hills</div>
           </div>
 
           <!--     Islands     -->
           <div class="nav-sub nav-category nav-item" data-href="geography/lands-landforms/islands/overview">Islands</div>
           <div class="nav-children">
-            <div class="nav-item" data-href="geography/lands-landforms/islands/azurecrest-isle">Azurecrest Isle</div><!-- Todo: placeholder -->
+            <div class="nav-item" data-href="geography/lands-landforms/islands/azurecrest-isle">Azurecrest Isle</div>
           </div>
 
           <!--     Lakes     -->
@@ -222,7 +225,7 @@
           <!--     Lowlands     -->
           <div class="nav-sub nav-category nav-item" data-href="geography/lands-landforms/lowlands/overview">Lowlands</div>
           <div class="nav-children">
-            <div class="nav-item" data-href="geography/lands-landforms/lowlands/greengallow-plains">Greengallow Plains</div><!-- Todo: placeholder -->
+            <div class="nav-item" data-href="geography/lands-landforms/lowlands/greengallow-plains">Greengallow Plains</div>
           </div>
 
           <!--     Marshes     -->
@@ -234,13 +237,13 @@
           <!--     Oases     -->
           <div class="nav-sub nav-category nav-item" data-href="geography/lands-landforms/oases/overview">Oases</div>
           <div class="nav-children">
-            <div class="nav-item" data-href="geography/lands-landforms/oases/the-sunwell">The Sunwell</div><!-- Todo: placeholder -->
+            <div class="nav-item" data-href="geography/lands-landforms/oases/the-sunwell">The Sunwell</div>
           </div>
 
           <!--     Peaks     -->
           <div class="nav-sub nav-category nav-item" data-href="geography/lands-landforms/peaks/overview">Peaks</div>
           <div class="nav-children">
-            <div class="nav-item" data-href="geography/lands-landforms/peaks/mount-kyraat">Mount Kyraat</div><!-- Todo: placeholder -->
+            <div class="nav-item" data-href="geography/lands-landforms/peaks/mount-kyraat">Mount Kyraat</div>
           </div>
 
           <!--     Ranges     -->
@@ -260,25 +263,25 @@
           <!--     Sky Isles     -->
           <div class="nav-sub nav-category nav-item" data-href="geography/lands-landforms/sky-isles/overview">Sky Isles</div>
           <div class="nav-children">
-            <div class="nav-item" data-href="geography/lands-landforms/sky-isles/aerthalan">Aerthalan</div><!-- Todo: placeholder -->
+            <div class="nav-item" data-href="geography/lands-landforms/sky-isles/aerthalan">Aerthalan</div>
           </div>
 
           <!--     Valleys     -->
           <div class="nav-sub nav-category nav-item" data-href="geography/lands-landforms/valleys/overview">Valleys</div>
           <div class="nav-children">
-            <div class="nav-item" data-href="geography/lands-landforms/valleys/moorhaven-valley">Moorhaven Valley</div><!-- Todo: placeholder -->
+            <div class="nav-item" data-href="geography/lands-landforms/valleys/moorhaven-valley">Moorhaven Valley</div>
           </div>
 
           <!--     Volcanoes     -->
           <div class="nav-sub nav-category nav-item" data-href="geography/lands-landforms/volcanoes/overview">Volcanoes</div>
           <div class="nav-children">
-            <div class="nav-item" data-href="geography/lands-landforms/volcanoes/emberspire">Emberspire</div><!-- Todo: placeholder -->
+            <div class="nav-item" data-href="geography/lands-landforms/volcanoes/emberspire">Emberspire</div>
           </div>
 
           <!--     Waterfalls     -->
           <div class="nav-sub nav-category nav-item" data-href="geography/lands-landforms/waterfalls/overview">Waterfalls</div>
           <div class="nav-children">
-            <div class="nav-item" data-href="geography/lands-landforms/waterfalls/silverveil-falls">Silverveil Falls</div><!-- Todo: placeholder -->
+            <div class="nav-item" data-href="geography/lands-landforms/waterfalls/silverveil-falls">Silverveil Falls</div>
           </div>
         </div>
 
@@ -335,7 +338,7 @@
 
     <div class="nav-section" data-section="nature">
       <div class="nav-main nav-category nav-item" data-href="nature/overview">
-        Nature
+        Nature 
       </div>
       <div class="nav-children">
         <div class="nav-item" data-href="nature/fauna/overview">Fauna</div>
@@ -375,7 +378,7 @@
 
     <div class="nav-section" data-section="mechanics">
       <div class="nav-main nav-category nav-item" data-href="mechanics/overview">
-        Mechanics
+        Mechanics 
       </div>
       <div class="nav-children">
         <div class="nav-item" data-href="mechanics/magic-system">Magic System</div>

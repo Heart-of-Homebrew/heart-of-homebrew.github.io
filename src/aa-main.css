@@ -217,6 +217,18 @@ html {
   color: var(--muted);
 }
 
+.gradient-text {
+  background: linear-gradient(
+    90deg,
+    var(--gold-1),
+    var(--gold-2)
+  );
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+
 h1 {
   font-family:"Cormorant Garamond";
   font-size:44px;
