@@ -14,6 +14,7 @@ main {
 
     max-width: var(--max-width);
     margin: 0 auto;
+    min-height: 0;
 }
 
 .archive-sidebar,
@@ -21,10 +22,12 @@ main {
     overflow-y: auto;
     height: 100%;
 
+    scrollbar-padding: 72px;
     padding-top: 72px;
     padding-bottom: 40px;
 
     box-sizing: border-box;
+    min-height: 0;
 }
 
 .archive-sidebar {
@@ -117,11 +120,6 @@ main {
 
 .archive-sidebar {
   scrollbar-gutter: stable;
-}
-
-.archive-content {
-    padding: 30px 40px;
-    overflow-y: auto;
 }
 
 .archive-title {
@@ -497,4 +495,9 @@ hr.section-divider {
 
 .archive-inline-media.media-left{
   grid-template-columns: 0.65fr 1.35fr;
+}
+
+#content-frame {
+  min-height: 0;
+  height: 100vh;
 }

@@ -7,7 +7,7 @@
 
    const navItems = layout.querySelectorAll(".nav-item");
    const navSections = layout.querySelectorAll(".nav-section");
-   const contentPanel = layout.querySelector(".archive-content");
+   const contentPanel = document.getElementById("content-frame");
 
    const DEFINITIONS_MAP = new Map();
 

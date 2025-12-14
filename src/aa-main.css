@@ -29,7 +29,7 @@
 }
 
 html, body {
-  height: 100%;
+  height: 100vh;
 }
 
 body {
@@ -40,14 +40,11 @@ body {
   color: #e6eef2;
   -webkit-font-smoothing: antialiased;
   line-height: 1.5;
-  padding-bottom: 40px;
-  padding-top: 72px;
 }
 
 main {
   max-width: var(--max-width);
   margin: 0 auto;
-  padding: 28px;
 }
 
 body::-webkit-scrollbar {
