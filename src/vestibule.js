@@ -126,38 +126,34 @@
        });
    }
 
-   function enhanceMediaParagraphs(root) {
+   function enhanceMediaBlocks(root) {
        const scope = root || document;
        const nodes = scope.querySelectorAll("[data-media-left], [data-media-right]");
        if (!nodes.length) return;
 
-       nodes.forEach(p => {
-           if (p.closest(".archive-inline-media")) return;
-
-           const leftSrc = p.getAttribute("data-media-left");
-           const rightSrc = p.getAttribute("data-media-right");
+       nodes.forEach(node => {
+           const leftSrc = node.getAttribute("data-media-left");
+           const rightSrc = node.getAttribute("data-media-right");
            const src = leftSrc || rightSrc;
            if (!src) return;
 
+           if (node.previousElementSibling && node.previousElementSibling.classList && node.previousElementSibling.classList.contains("media-float")) {
+               return;
+           }
+
            const side = leftSrc ? "left" : "right";
 
-           const wrapper = document.createElement("div");
-           wrapper.className = "archive-inline-media";
-           wrapper.classList.add(side === "left" ? "media-left" : "media-right");
-
-
            const figure = document.createElement("figure");
-           figure.className = "archive-figure";
+           figure.className = "media-float " + (side === "left" ? "media-float-left" : "media-float-right");
 
            const img = document.createElement("img");
            img.className = "archive-figure-img";
            img.src = src;
-           img.alt = p.getAttribute("data-media-alt") || "";
-
-           const capText = p.getAttribute("data-media-cap");
+           img.alt = node.getAttribute("data-media-alt") || "";
 
            figure.appendChild(img);
 
+           const capText = node.getAttribute("data-media-cap");
            if (capText) {
                const cap = document.createElement("figcaption");
                cap.className = "archive-figure-cap";
@@ -165,22 +161,14 @@
                figure.appendChild(cap);
            }
 
-           const parent = p.parentNode;
-           parent.insertBefore(wrapper, p);
-           wrapper.appendChild(p);
+           node.parentNode.insertBefore(figure, node);
 
-           if (side === "left") {
-               wrapper.insertBefore(figure, p);
-           } else {
-               wrapper.appendChild(figure);
-           }
-
-           p.removeAttribute("data-media-left");
-           p.removeAttribute("data-media-right");
+           node.removeAttribute("data-media-left");
+           node.removeAttribute("data-media-right");
        });
    }
 
-   window.enhanceMediaParagraphs = enhanceMediaParagraphs;
+   window.enhanceMediaBlocks = enhanceMediaBlocks;
 
    function highlightSection(sectionName) {
        navSections.forEach(section => {
@@ -239,8 +227,22 @@
            const html = await htmlResponse.text();
            contentPanel.innerHTML = html;
 
-           enhanceMediaParagraphs(contentPanel);
+           enhanceMediaBlocks(contentPanel);
            initDefinitionsTooltips(contentPanel);
+
+               const content = document.querySelector(".archive-content");
+               const banner = document.querySelector(".archive-banner");
+
+               const fadeDistance = 250;
+
+               content.addEventListener("scroll", () => {
+                 const scrollTop = content.scrollTop
+
+                 let opacity = 1 - scrollTop / fadeDistance
+                 opacity = Math.min(1, Math.max(0, opacity))
+
+                 banner.style.opacity = opacity
+               });
        } catch (err) {
            console.error("Error loading archive content:", err);
            contentPanel.innerHTML = `
