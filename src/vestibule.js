@@ -1,4 +1,3 @@
-//Todo: when archive content is loaded reset scroll to top
 //Todo: add expand-all and collapse-all buttons to spoiler segments
 //Todo: make sure sidebar sync is happening any time hash changes in the archive, or when back and forth arrows are being used
 (function () {
