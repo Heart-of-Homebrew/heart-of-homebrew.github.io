@@ -61,7 +61,6 @@ function loadScript(url) {
 }
 
 function unhideHiddenInits() {
-  console.log("unhiding");
   document.querySelectorAll('.hidden-init').forEach(el => {
     el.classList.remove('hidden-init');
     el.classList.add('unhidden-init');
@@ -69,7 +68,6 @@ function unhideHiddenInits() {
 }
 
 function hideUnhiddenInits() {
-  console.log("hiding");
   document.querySelectorAll('.unhidden-init').forEach(el => {
     el.classList.remove('unhidden-init');
     el.classList.add('hidden-init');
@@ -84,6 +82,7 @@ function clearPageAssets() {
 }
 
 async function loadPage(routeName) {
+  console.log("loading...");
   const route = ROUTES[routeName];
   if (!route) return;
   const frame = document.getElementById("frame");
@@ -95,6 +94,9 @@ async function loadPage(routeName) {
   await loadScript(route.js);
   unhideHiddenInits();
   updateActiveNav(routeName);
+  if (routeName.includes("archive")) {
+    window.initArchiveBannerScrollFade();
+  }
 }
 
 function updateActiveNav(routeName) {
@@ -174,6 +176,7 @@ window.addEventListener("DOMContentLoaded", async () => {
     const topRoute = hash.substring(1, slash);
     await loadPage(topRoute);
     if (window.loadArchiveContent) {
+      console.log("hoipo");
       const route = "pages/" + location.hash.substring(1);
       window.loadArchiveContent(route);
     }
