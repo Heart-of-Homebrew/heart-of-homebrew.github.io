@@ -271,7 +271,7 @@ h3 {
   font-weight:700;
 }
 
-button, .btn, .nav a, header, .hero-cta a, summary, .no-select, img {
+button, .btn, .nav a, header, .hero-cta a, .no-select, img {
   user-select: none;
   -webkit-user-select: none;
   -ms-user-select: none;
