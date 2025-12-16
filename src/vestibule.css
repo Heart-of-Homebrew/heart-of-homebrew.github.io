@@ -289,10 +289,10 @@ a {
     border-radius: 12px;
     background:linear-gradient(
         135deg,
-        rgba(23,130,194,0.08),
-        rgba(30,127,80,0.08)
+        rgba(23,130,194,0.12),
+        rgba(30,127,80,0.12)
     );
-    border:1px solid rgba(255,255,255,0.06);
+    border:1px solid rgba(255,255,255,0.1);
 }
 
 .archive-section + .archive-section {
@@ -347,10 +347,10 @@ a {
   border-radius: var(--radius);
   background: linear-gradient(
       135deg,
-      rgba(23,130,194,0.12),
-      rgba(30,127,80,0.10)
+      rgba(23,130,194,0.16),
+      rgba(30,127,80,0.14)
   );
-  border: 1px solid rgba(255,255,255,0.06);
+  border: 1px solid rgba(255,255,255,0.1);
   color: var(--muted);
   max-width: 100%;
   font-family: inherit;
@@ -421,7 +421,7 @@ strong {
     font-weight: 450;
 }
 
-.sapph{
+.sapph {
     color:var(--sapphire-2);
     font-weight:750;
     opacity:0.92;
@@ -442,28 +442,28 @@ hr.section-divider {
   overflow:hidden;
 }
 
-.archive-section h3 + ul{
+.archive-section h3 + ul {
     list-style:none;
     padding-left:0;
     margin:10px 0 2px;
 }
 
-.archive-section h3 + ul > li{
+.archive-section h3 + ul > li {
     padding:7px 0;
     border-bottom:1px solid rgba(255,255,255,0.06);
 }
 
-.archive-section h3 + ul > li:last-child{
+.archive-section h3 + ul > li:last-child {
     border-bottom:none;
 }
 
-.archive-section h3 + ul ul{
+.archive-section h3 + ul ul {
     margin:8px 0 0;
     padding-left:1.15rem;
     list-style:disc;
 }
 
-.archive-inline-media{
+.archive-inline-media {
   display:grid;
   grid-template-columns: 1.35fr 0.65fr;
   gap:18px;
@@ -471,7 +471,7 @@ hr.section-divider {
   margin: 14px 0;
 }
 
-.archive-figure{
+.archive-figure {
   align-self: center;
   margin:0;
   padding:12px;
@@ -480,7 +480,7 @@ hr.section-divider {
   border-radius: 12px;
 }
 
-.archive-figure-img{
+.archive-figure-img {
   width:100%;
   height:auto;
   display:block;
@@ -488,20 +488,20 @@ hr.section-divider {
   border: 1px solid rgba(255,215,120,0.06);
 }
 
-.archive-figure-cap{
+.archive-figure-cap {
   text-align: center;
   margin-top:10px;
   font-size: 13px;
   color: var(--muted);
 }
 
-@media (max-width: 900px){
+@media (max-width: 900px) {
   .archive-inline-media{
     grid-template-columns: 1fr;
   }
 }
 
-.archive-inline-media.media-right{
+.archive-inline-media.media-right {
   grid-template-columns: 1.35fr 0.65fr;
 }
 
@@ -509,7 +509,7 @@ hr.section-divider {
   grid-template-columns: 0.65fr 1.35fr;
 }
 
-.media-float{
+.media-float {
   max-width: 220px;
   width: clamp(140px, 22vw, 220px);
   margin: 8px 0 10px 0;
@@ -519,17 +519,17 @@ hr.section-divider {
   border-radius: 12px;
 }
 
-.media-float-right{
+.media-float-right {
   float: right;
   margin-left: 16px;
 }
 
-.media-float-left{
+.media-float-left {
   float: left;
   margin-right: 16px;
 }
 
-.archive-figure-img{
+.archive-figure-img {
   width: 100%;
   height: auto;
   display: block;
@@ -537,20 +537,20 @@ hr.section-divider {
   border: 1px solid rgba(255,215,120,0.06);
 }
 
-.archive-figure-cap{
+.archive-figure-cap {
   margin-top: 10px;
   font-size: 13px;
   color: var(--muted);
 }
 
 .archive-section::after,
-.archive-content::after{
+.archive-content::after {
   content: "";
   display: block;
   clear: both;
 }
 
-@media (max-width: 900px){
+@media (max-width: 900px) {
   .media-float-left,
   .media-float-right{
     float: none;
@@ -567,6 +567,9 @@ hr.section-divider {
 }
 
 .archive-banner {
+  display: flex;
+  justify-content: center;
+  text-align: center;
   position: absolute;
   transition: opacity 0.1s linear;
   top: 0;
@@ -575,6 +578,27 @@ hr.section-divider {
   height: 300px;
   z-index: 0;
   pointer-events: none;
+}
+
+.archive-banner p {
+  line-height: 0.9;
+  align-self: center;
+  display: block;
+  font-family: "Cormorant Garamond";
+  font-weight: 800;
+  position: relative;
+  top: 67px;
+  font-size: 80px;
+  color: var(--gold-1);
+}
+
+.archive-banner p.hw {
+  line-height: 0.75;
+}
+
+.archive-banner p b {
+  position: relative;
+  bottom: 0.25em;
 }
 
 .archive-banner-img {
@@ -586,7 +610,7 @@ hr.section-divider {
   object-fit: cover;
 }
 
-#content-frame .archive-content{
+#content-frame .archive-content {
   position: relative;
   z-index: 1;
 }
