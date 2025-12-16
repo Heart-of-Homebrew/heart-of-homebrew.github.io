@@ -229,19 +229,8 @@
            enhanceMediaBlocks(contentPanel);
            initDefinitionsTooltips(contentPanel);
 
-               const content = document.querySelector(".archive-content");
-               const banner = document.querySelector(".archive-banner");
+           initArchiveBannerScrollFade();
 
-               const fadeDistance = 250;
-
-               content.addEventListener("scroll", () => {
-                 const scrollTop = content.scrollTop
-
-                 let opacity = 1 - scrollTop / fadeDistance
-                 opacity = Math.min(1, Math.max(0, opacity))
-
-                 banner.style.opacity = opacity
-               });
        } catch (err) {
            console.error("Error loading archive content:", err);
            contentPanel.innerHTML = `
@@ -254,6 +243,24 @@
    }
 
    window.loadArchiveContent = loadArchiveContent;
+
+   function initArchiveBannerScrollFade() {
+     const content = document.querySelector(".archive-content");
+     const banner = document.querySelector(".archive-banner");
+
+     const fadeDistance = 250;
+
+     content.addEventListener("scroll", () => {
+        const scrollTop = content.scrollTop
+
+        let opacity = 1 - scrollTop / fadeDistance
+        opacity = Math.min(1, Math.max(0, opacity))
+
+        banner.style.opacity = opacity
+      });
+   }
+
+   window.initArchiveBannerScrollFade = initArchiveBannerScrollFade;
 
    function normalizeHref(raw) {
        if (!raw) return null;
