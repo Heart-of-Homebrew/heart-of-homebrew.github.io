@@ -82,7 +82,6 @@ function clearPageAssets() {
 }
 
 async function loadPage(routeName) {
-  console.log("loading...");
   const route = ROUTES[routeName];
   if (!route) return;
   const frame = document.getElementById("frame");
@@ -142,46 +141,56 @@ function initHoverSwap() {
 
 let suppressHashHandler = false;
 
-window.addEventListener("hashchange", () => {
+window.addEventListener("hashchange", async () => {
   if (suppressHashHandler) {
     suppressHashHandler = false;
     return;
   }
-  let hash = location.hash || "#atrium";
+
+  const hash = location.hash || "#atrium";
   let route = hash.substring(1);
+
   if (hash.startsWith("#archive")) {
-    if (!(hash === "#archive")) {
+    if (hash !== "#archive") {
       if (window.loadArchiveContent) {
-        const route = "pages/" + location.hash.substring(1);
-        window.loadArchiveContent(route);
+        const archiveRoute = "pages/" + location.hash.substring(1);
+        await window.loadArchiveContent(archiveRoute);
+
+        if (window.syncArchiveSidebarFromHash) window.syncArchiveSidebarFromHash();
+        if (window.syncArchiveBannerPadding) window.syncArchiveBannerPadding();
       }
       return;
     }
   }
+
   if (!(Object.prototype.hasOwnProperty.call(ROUTES, route) | hash.startsWith("#archive"))) {
     suppressHashHandler = true;
     location.hash = "#atrium";
     route = "atrium";
   }
+
   loadPage(route);
 });
 
+
 window.addEventListener("DOMContentLoaded", async () => {
   initHoverSwap();
+
   const hash = location.hash || "#atrium";
   const slash = hash.indexOf("/");
+
   if (slash === -1) {
     await loadPage(hash.substring(1));
   } else {
     const topRoute = hash.substring(1, slash);
     await loadPage(topRoute);
+
     if (window.loadArchiveContent) {
-      console.log("hoipo");
-      const route = "pages/" + location.hash.substring(1);
-      window.loadArchiveContent(route);
-    }
-    if (window.syncArchiveSidebarFromHash) {
-      window.syncArchiveSidebarFromHash(location.hash);
+      const archiveRoute = "pages/" + location.hash.substring(1);
+      await window.loadArchiveContent(archiveRoute);
+
+      if (window.syncArchiveSidebarFromHash) window.syncArchiveSidebarFromHash();
+      if (window.syncArchiveBannerPadding) window.syncArchiveBannerPadding();
     }
   }
 });

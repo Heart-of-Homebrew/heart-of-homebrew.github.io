@@ -1,9 +1,17 @@
-<!--Todo: make archive-content margin-top increase when top bar logo multi-lines-->
 <!--Todo: Orienta by the end of the month-->
 <!--Todo: incorporate anchors and deep links using route@anchor concept-->
 <!--Todo: unify all site css, doing away with hidden init, and thus no more flickering or FOUC-->
-<!--Todo: slightly scale stuff down to 90% to better the proportions and provide a little more space-->
+<!--Todo: slightly scale stuff down to ~90% to better the proportions and provide a little more space-->
 <!doctype html>
+<script>
+    fetch('https://api.github.com/repos/heart-of-homebrew/heart-of-homebrew.github.io', {
+        headers: {
+            'Accept': 'application/vnd.github+json'
+        }
+    })
+    .then(v => v.json())
+    .then(v => { console.log("Repo Size: " + v['size'] + ' KB') });
+</script>
 <html lang="en">
 <head>
     <meta charset="utf-8"/>

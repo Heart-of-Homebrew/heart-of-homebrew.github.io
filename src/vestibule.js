@@ -1,5 +1,4 @@
 //Todo: add expand-all and collapse-all buttons to spoiler segments
-//Todo: make sure sidebar sync is happening any time hash changes in the archive, or when back and forth arrows are being used
 (function () {
    const layout = document.querySelector(".archive-layout");
    if (!layout) return;
@@ -274,8 +273,9 @@
        return href;
    }
 
-   function syncArchiveSidebarFromHash(hash) {
-       if (!layout || !hash) return;
+   function syncArchiveSidebarFromHash() {
+       if (!layout) return;
+       let hash = location.hash;
        if (hash.startsWith("#")) hash = hash.slice(1);
        if (!hash.startsWith("archive")) return;
 
@@ -438,4 +438,36 @@
        },
        map: DEFINITIONS_MAP
    };
+
+   function syncArchiveBannerPadding() {
+     const banner = document.querySelector(".archive-banner");
+     const topbar = document.querySelector(".topbar");
+     const archiveContent = document.querySelector(".archive-content");
+
+     if (!banner || !topbar || !archiveContent) return;
+
+     const navHeight = topbar.getBoundingClientRect().height;
+     console.log("nav-height: " + navHeight);
+
+     banner.style.top = (navHeight - 60) + "px";
+     archiveContent.style.paddingTop = (navHeight + 300) + "px"
+
+     console.log("banner-top: " + banner.style.top);
+   }
+   window.syncArchiveBannerPadding = syncArchiveBannerPadding;
+
+   window.addEventListener("resize", syncArchiveBannerPadding);
+   window.addEventListener("orientationchange", syncArchiveBannerPadding);
+   syncArchiveBannerPadding();
+
+   if (window.visualViewport) {
+     visualViewport.addEventListener("resize", syncArchiveBannerPadding);
+   }
+
+   const observer = new MutationObserver(syncArchiveBannerPadding);
+   observer.observe(document.documentElement, {
+     attributes: true,
+     childList: false,
+     subtree: false
+   });
 })();

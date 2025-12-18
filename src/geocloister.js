@@ -1,3 +1,3 @@
 (function () {
-    console.log("Cartohall (Map) page loaded.");
+    console.log("Geocloister (Map) page loaded.");
 })();
