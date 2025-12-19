@@ -212,14 +212,19 @@
            const htmlResponse = await fetch(target + ".html");
 
            if (!htmlResponse.ok) {
-               contentPanel.innerHTML = `
-                   <div class="archive-error">
+              if (target.includes("404")) {
+                 contentPanel.innerHTML = `
+                     <div class="archive-error">
                        <p>Unable to load this entry.</p>
                        <p><small>(${htmlResponse.status} ${htmlResponse.statusText})</small></p>
-                   </div>
-               `;
-               window.unhideHiddenInits();
-               return;
+                     </div>
+                 `;
+                 window.unhideHiddenInits();
+              } else {
+                await loadArchiveContent("pages/archive/404");
+                syncArchiveBannerPadding();
+              }
+              return;
            }
 
            const html = await htmlResponse.text();
@@ -447,12 +452,9 @@
      if (!banner || !topbar || !archiveContent) return;
 
      const navHeight = topbar.getBoundingClientRect().height;
-     console.log("nav-height: " + navHeight);
 
      banner.style.top = (navHeight - 60) + "px";
      archiveContent.style.paddingTop = (navHeight + 300) + "px"
-
-     console.log("banner-top: " + banner.style.top);
    }
    window.syncArchiveBannerPadding = syncArchiveBannerPadding;
 
