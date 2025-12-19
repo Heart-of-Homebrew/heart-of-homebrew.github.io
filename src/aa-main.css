@@ -9,8 +9,32 @@
   --sapphire-1: #0f4f78;
   --sapphire-2: #1782c2;
   --glass: rgba(255,255,255,0.02);
+  --wip-gray: #6f7880;
   --radius: 12px;
   --max-width: 1200px;
+}
+
+.wip,
+.wip:link,
+.wip:visited,
+.wip:hover,
+.wip:active,
+.wip:focus,
+.wip:focus-visible {
+  color: var(--wip-gray) !important;
+  opacity: 0.6 !important;
+
+  pointer-events: none !important;
+  cursor: default !important;
+
+  user-select: none !important;
+  -webkit-user-select: none !important;
+  -ms-user-select: none !important;
+
+  text-decoration: none !important;
+  background: none !important;
+  box-shadow: none !important;
+  outline: none !important;
 }
 
 *::-webkit-scrollbar {
